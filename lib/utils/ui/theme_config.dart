@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const mainBackgroundColor = Colors.deepPurpleAccent;
+  static const mainBackgroundColor = Color.fromARGB(255, 30, 16, 67);
   static const mainColor = Colors.amber;
 
   //buttons
