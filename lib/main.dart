@@ -9,7 +9,7 @@ class SpaceGame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Space game',
+      title: 'End Space',
       home: Screen(),
     );
   }
