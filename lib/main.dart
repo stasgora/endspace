@@ -53,7 +53,7 @@ class SpaceGame extends StatelessWidget {
       fontFamily: 'Lato',
       scaffoldBackgroundColor: AppColors.mainBackgroundColor,
       textTheme: TextTheme(
-        headline1: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold, color: AppColors.darkTextColor), // Scaffold/appbar headline
+        headline1: TextStyle(fontSize: 32.0, fontFamily: 'LuckiestGuy', color: AppColors.lightTextColor), // Scaffold/appbar headline
         headline2: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: AppColors.darkTextColor), // Main headline before lists
         headline3: TextStyle(fontSize: 20.0, fontWeight: FontWeight.normal, color: AppColors.darkTextColor), //For headers inside list elements
         subtitle2: TextStyle(fontSize: 13.0, fontWeight: FontWeight.normal, color: AppColors.mediumTextColor), // Little subtitle for headline2
