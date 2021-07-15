@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:game/model/room.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../model/room.dart';
 import '../../services/room/room_service.dart';
 
 part 'start_page_state.dart';

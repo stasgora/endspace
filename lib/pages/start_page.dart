@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:game/model/room.dart';
 import '../logic/start_page/start_page_cubit.dart';
 import '../model/ui/ui_button.dart';
 import '../model/ui/ui_text_field.dart';

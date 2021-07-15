@@ -23,12 +23,7 @@ class SocketRoomService implements RoomService {
   }
 
   @override
-  void leaveRoom({required String name, required String roomCode}) {
-    connection.socket.emit('leaveRoom', {
-      'name': name,
-      'roomCode': roomCode,
-    });
-  }
+  void leaveRoom() => connection.socket.emit('leaveRoom');
 
   @override
   void onRoomJoined(void Function(Room) callback) {

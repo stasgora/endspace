@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:game/utils/app_strings.dart';
-import 'package:game/utils/ui/theme_config.dart';
+import '../utils/app_strings.dart';
+import '../utils/ui/theme_config.dart';
 
 class PlayerAvatar extends StatelessWidget {
   final int index;

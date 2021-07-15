@@ -16,4 +16,6 @@ class RoomCubit extends Cubit<RoomState> {
       players: players,
     ))));
   }
+
+  void exitRoom() => _roomService.leaveRoom();
 }
