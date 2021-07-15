@@ -2,14 +2,14 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:get_it/get_it.dart';
 
-import '../services/room/room_service.dart';
+import '../../services/room/room_service.dart';
 
-part 'room_state.dart';
+part 'start_page_state.dart';
 
-class RoomCubit extends Cubit<RoomState> {
+class StartPageCubit extends Cubit<StartPageState> {
   final _roomService = GetIt.I<RoomService>();
 
-  RoomCubit() : super(RoomInitial()) {
+  StartPageCubit() : super(RoomInitial()) {
     _roomService.onRoomJoined((code) => emit(RoomJoined(code)));
   }
 

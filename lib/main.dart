@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
-import 'logic/room_cubit.dart';
+import 'logic/room/room_cubit.dart';
+import 'logic/start_page/start_page_cubit.dart';
+import 'pages/room_page.dart';
 import 'pages/start_page.dart';
 import 'services/connection_provider.dart';
 import 'services/room/room_service.dart';
@@ -23,12 +25,22 @@ class SpaceGame extends StatelessWidget {
       title: 'End Space',
       theme: _createAppTheme(),
       themeMode: ThemeMode.light,
-      home: withCubit(StartPage(), RoomCubit()),
+      initialRoute: '/start-page',
+      routes: _createRoutes(),
     );
   }
 
+
+  Map<String, WidgetBuilder> _createRoutes() {
+    getParams(BuildContext context) => ModalRoute.of(context)?.settings.arguments;
+    return {
+      '/start-page': (ctx) => withCubit(StartPage(), StartPageCubit()),
+      '/room-page': (ctx) => withCubit(RoomPage(), RoomCubit(getParams(ctx) as String)),
+    };
+  }
+
   Widget withCubit<CubitType extends Cubit>(Widget widget, CubitType cubit) {
-    return BlocProvider(
+    return BlocProvider<CubitType>(
       create: (context) => cubit,
       child: widget,
     );

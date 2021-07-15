@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../logic/room_cubit.dart';
+import '../logic/start_page/start_page_cubit.dart';
 import '../model/ui/ui_button.dart';
 import '../model/ui/ui_text_field.dart';
 import '../widgets/buttons/action_button.dart';
@@ -20,10 +20,10 @@ class _StartPageState extends State<StartPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<RoomCubit, RoomState>(
+    return BlocListener<StartPageCubit, StartPageState>(
       listener: (context, state) {
         if (state is RoomJoined) {
-          //print('navigate');
+          Navigator.of(context).pushNamed('/room-page', arguments: state.code);
         }
       },
       child: Scaffold(
@@ -69,10 +69,15 @@ class _StartPageState extends State<StartPage> {
   }
 
   void onStartButton() {
-    context.read<RoomCubit>().createRoom(nameController.text);
+    context.read<StartPageCubit>().createRoom(nameController.text);
   }
 
-  void onJoinButton() {}
+  void onJoinButton() {
+    context.read<StartPageCubit>().joinRoom(
+          name: nameController.text,
+          roomCode: roomController.text,
+        );
+  }
 
   @override
   void dispose() {
