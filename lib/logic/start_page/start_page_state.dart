@@ -8,10 +8,10 @@ abstract class StartPageState extends Equatable {
 class RoomInitial extends StartPageState {}
 
 class RoomJoined extends StartPageState {
-  final String code;
+  final Room room;
 
-  RoomJoined(this.code);
+  RoomJoined(this.room);
 
   @override
-  List<Object> get props => [code];
+  List<Object> get props => [room];
 }

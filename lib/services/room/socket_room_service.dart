@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 
+import '../../model/room.dart';
 import '../connection_provider.dart';
 import 'room_service.dart';
 
@@ -30,7 +31,12 @@ class SocketRoomService implements RoomService {
   }
 
   @override
-  void onRoomJoined(void Function(String) callback) {
-    connection.socket.on('roomJoined', (data) => callback(data as String));
+  void onRoomJoined(void Function(Room) callback) {
+    connection.socket.on('roomJoined', (data) => callback(Room.fromJson(data)));
+  }
+
+  @override
+  void onPlayersChanged(void Function(List<String>) callback) {
+    connection.socket.on('playersChange', (data) => callback((data as List).cast<String>()));
   }
 }

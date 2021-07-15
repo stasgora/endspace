@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game/model/room.dart';
 import '../logic/start_page/start_page_cubit.dart';
 import '../model/ui/ui_button.dart';
 import '../model/ui/ui_text_field.dart';
@@ -23,7 +24,7 @@ class _StartPageState extends State<StartPage> {
     return BlocListener<StartPageCubit, StartPageState>(
       listener: (context, state) {
         if (state is RoomJoined) {
-          Navigator.of(context).pushNamed('/room-page', arguments: state.code);
+          Navigator.of(context).pushNamed('/room-page', arguments: state.room);
         }
       },
       child: Scaffold(

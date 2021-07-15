@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:game/model/room.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../services/room/room_service.dart';
@@ -10,7 +11,7 @@ class StartPageCubit extends Cubit<StartPageState> {
   final _roomService = GetIt.I<RoomService>();
 
   StartPageCubit() : super(RoomInitial()) {
-    _roomService.onRoomJoined((code) => emit(RoomJoined(code)));
+    _roomService.onRoomJoined((room) => emit(RoomJoined(room)));
   }
 
   void createRoom(String name) => _roomService.createRoom(name: name);

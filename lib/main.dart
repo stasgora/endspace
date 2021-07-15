@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 
 import 'logic/room/room_cubit.dart';
 import 'logic/start_page/start_page_cubit.dart';
+import 'model/room.dart';
 import 'pages/room_page.dart';
 import 'pages/start_page.dart';
 import 'services/connection_provider.dart';
@@ -30,12 +31,11 @@ class SpaceGame extends StatelessWidget {
     );
   }
 
-
   Map<String, WidgetBuilder> _createRoutes() {
     getParams(BuildContext context) => ModalRoute.of(context)?.settings.arguments;
     return {
       '/start-page': (ctx) => withCubit(StartPage(), StartPageCubit()),
-      '/room-page': (ctx) => withCubit(RoomPage(), RoomCubit(getParams(ctx) as String)),
+      '/room-page': (ctx) => withCubit(RoomPage(), RoomCubit(getParams(ctx) as Room)),
     };
   }
 

@@ -1,11 +1,10 @@
 part of 'room_cubit.dart';
 
 class RoomState extends Equatable {
-  final String code;
-  final List<String> players;
+  final Room room;
 
-  RoomState({required this.code, this.players = const []});
+  RoomState(this.room);
 
   @override
-  List<Object> get props => [code, players];
+  List<Object> get props => [room];
 }
