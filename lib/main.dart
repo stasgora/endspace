@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import 'logic/room_cubit.dart';
-import 'package:game/pages/start_page.dart';
-import 'package:game/utils/ui/theme_config.dart';
+import 'pages/start_page.dart';
 import 'services/connection_provider.dart';
 import 'services/room/room_service.dart';
 import 'services/room/socket_room_service.dart';
+import 'utils/ui/theme_config.dart';
 
 void main() {
   GetIt.I.registerSingleton(ConnectionProvider());

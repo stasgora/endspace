@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:game/model/ui/ui_text_field.dart';
+import '../../model/ui/ui_text_field.dart';
 
 class CustomTextField extends StatelessWidget {
   final UITextField uiTextField;

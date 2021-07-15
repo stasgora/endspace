@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:game/model/ui/ui_button.dart';
-import 'package:game/utils/ui/theme_config.dart';
+import '../../model/ui/ui_button.dart';
+import '../../utils/ui/theme_config.dart';
 
 class ActionButton extends StatelessWidget {
   final UIButton button;
