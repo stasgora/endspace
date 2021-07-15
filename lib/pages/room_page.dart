@@ -36,7 +36,7 @@ class RoomPage extends StatelessWidget {
                               .textTheme
                               .headline1!
                               .copyWith(fontSize: 16)),
-                      Text(state.code, style: Theme.of(context).textTheme.headline1),
+                      Text(state.room.code, style: Theme.of(context).textTheme.headline1),
                       Padding(
                         padding: const EdgeInsets.only(top: 16),
                         child: Text("CREW:",
@@ -49,7 +49,7 @@ class RoomPage extends StatelessWidget {
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              for(var player in BlocProvider.of<RoomCubit>(context).state.players)
+                              for(var player in BlocProvider.of<RoomCubit>(context).state.room.players)
                                 Container(
                                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                                   color: Colors.white70,
