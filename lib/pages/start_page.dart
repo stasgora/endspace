@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:game/widgets/buttons/custom_code_field.dart';
+
 import '../logic/start_page/start_page_cubit.dart';
 import '../model/ui/ui_button.dart';
 import '../model/ui/ui_text_field.dart';
 import '../widgets/buttons/action_button.dart';
+import '../widgets/buttons/custom_code_field.dart';
 import '../widgets/buttons/custom_text_field.dart';
 
 class StartPage extends StatefulWidget {
@@ -88,10 +89,12 @@ class _StartPageState extends State<StartPage> {
   }
 
   void onStartButton() {
+    FocusScope.of(context).requestFocus(FocusNode());
     context.read<StartPageCubit>().createRoom(nameController.text);
   }
 
   void onJoinButton() {
+    FocusScope.of(context).requestFocus(FocusNode());
     context.read<StartPageCubit>().joinRoom(
           name: nameController.text,
           roomCode: roomController.text,
