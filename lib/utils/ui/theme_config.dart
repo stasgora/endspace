@@ -8,6 +8,12 @@ class AppColors {
 
   //buttons
   static const Color actionButton = Colors.amber;
+  
+  //textFields
+  static const Color textFieldEnabledOutline = Colors.white;
+  static const Color textFieldFocusedOutline = Color.fromARGB(170, 255, 255, 255);
+  static const Color textFieldBasicBackground = Color.fromARGB(255, 41, 201, 130);
+
 
   //text
   static const Color darkTextColor = Colors.black38;
@@ -22,4 +28,14 @@ class AppColors {
     Color.fromARGB(255, 58, 134, 255),
     Color.fromARGB(255, 46, 196, 182)
   ];
+}
+
+class MiscTheme {
+  static const double actionButtonRadius = 16;
+  static const double textFieldRadius = 8;
+
+  static const int codeLength = 8;
+  static const int nameLength = 12;
+
+
 }
