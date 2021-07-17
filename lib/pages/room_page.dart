@@ -58,7 +58,7 @@ class RoomPage extends StatelessWidget {
                       _buildCrewList(context),
                       ActionButton(UIButton(
                         "start",
-                        () {},
+                        () => context.read<RoomCubit>().startGame(),
                       )),
                       ActionButton(UIButton(
                         "exit",

@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:game/utils/ui/theme_config.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+
+import '../../utils/ui/theme_config.dart';
 
 class CustomCodeField extends StatefulWidget {
   final TextEditingController controller;

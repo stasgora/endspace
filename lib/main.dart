@@ -5,16 +5,16 @@ import 'package:get_it/get_it.dart';
 import 'logic/room/room_cubit.dart';
 import 'logic/start_page/start_page_cubit.dart';
 import 'model/room.dart';
+import 'pages/game_page.dart';
 import 'pages/room_page.dart';
 import 'pages/start_page.dart';
 import 'services/connection_provider.dart';
-import 'services/room/room_service.dart';
-import 'services/room/socket_room_service.dart';
 import 'utils/ui/theme_config.dart';
 
 void main() {
   GetIt.I.registerSingleton(ConnectionProvider());
-  GetIt.I.registerSingleton<RoomService>(SocketRoomService());
+  GetIt.I.registerSingleton(GlobalKey<NavigatorState>());
+  GetIt.I.registerSingleton(RouteObserver());
 
   runApp(SpaceGame());
 }
@@ -28,14 +28,24 @@ class SpaceGame extends StatelessWidget {
       themeMode: ThemeMode.light,
       initialRoute: '/start-page',
       routes: _createRoutes(),
+      navigatorKey: GetIt.I<GlobalKey<NavigatorState>>(),
+      navigatorObservers: [GetIt.I<RouteObserver<Route>>()],
     );
   }
 
   Map<String, WidgetBuilder> _createRoutes() {
-    getParams(BuildContext context) => ModalRoute.of(context)?.settings.arguments;
+    var getRoute = ModalRoute.of;
+    getParams(BuildContext context) => getRoute(context)?.settings.arguments;
     return {
-      '/start-page': (ctx) => withCubit(StartPage(), StartPageCubit()),
-      '/room-page': (ctx) => withCubit(RoomPage(), RoomCubit(getParams(ctx) as Room)),
+      '/start-page': (ctx) => withCubit(
+            StartPage(),
+            StartPageCubit(getRoute(ctx)!),
+          ),
+      '/room-page': (ctx) => withCubit(
+            RoomPage(),
+            RoomCubit(route: getRoute(ctx)!, room: getParams(ctx) as Room),
+          ),
+      '/game-page': (ctx) => GamePage(),
     };
   }
 
@@ -53,13 +63,41 @@ class SpaceGame extends StatelessWidget {
       fontFamily: 'Lato',
       scaffoldBackgroundColor: AppColors.mainBackgroundColor,
       textTheme: TextTheme(
-        headline1: TextStyle(fontSize: 32.0, fontFamily: 'LuckiestGuy', color: AppColors.lightTextColor), // Scaffold/appbar headline
-        headline2: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: AppColors.darkTextColor), // Main headline before lists
-        headline3: TextStyle(fontSize: 20.0, fontWeight: FontWeight.normal, color: AppColors.darkTextColor), //For headers inside list elements
-        subtitle2: TextStyle(fontSize: 13.0, fontWeight: FontWeight.normal, color: AppColors.mediumTextColor), // Little subtitle for headline2
-        bodyText1: TextStyle(fontSize: 15.0, fontWeight: FontWeight.normal, color: AppColors.lightTextColor), // Classic body text on light background
-        bodyText2: TextStyle(fontSize: 15.0, fontWeight: FontWeight.normal, color: AppColors.darkTextColor), // Classic body text on color
-        button: TextStyle(fontSize: 32.0, color: AppColors.lightTextColor, fontFamily: 'LuckiestGuy') // (Almost always white) button text
+        headline1: TextStyle(
+          fontSize: 32.0,
+          fontFamily: 'LuckiestGuy',
+          color: AppColors.lightTextColor,
+        ), // Scaffold/appbar headline
+        headline2: TextStyle(
+          fontSize: 18.0,
+          fontWeight: FontWeight.bold,
+          color: AppColors.darkTextColor,
+        ), // Main headline before lists
+        headline3: TextStyle(
+          fontSize: 20.0,
+          fontWeight: FontWeight.normal,
+          color: AppColors.darkTextColor,
+        ), //For headers inside list elements
+        subtitle2: TextStyle(
+          fontSize: 13.0,
+          fontWeight: FontWeight.normal,
+          color: AppColors.mediumTextColor,
+        ), // Little subtitle for headline2
+        bodyText1: TextStyle(
+          fontSize: 15.0,
+          fontWeight: FontWeight.normal,
+          color: AppColors.lightTextColor,
+        ), // Classic body text on light background
+        bodyText2: TextStyle(
+          fontSize: 15.0,
+          fontWeight: FontWeight.normal,
+          color: AppColors.darkTextColor,
+        ), // Classic body text on color
+        button: TextStyle(
+          fontSize: 32.0,
+          color: AppColors.lightTextColor,
+          fontFamily: 'LuckiestGuy',
+        ), // (Almost always white) button text
       ),
     );
   }

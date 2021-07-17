@@ -14,6 +14,10 @@ dependencies:
 
   socket_io_client: ^1.0.1
   flutter_bloc: ^7.0.1
+  reloadable_bloc:
+    git:
+      url: https://github.com/stasgora/bloc-extensions.git
+      path: reloadable_bloc
 
   get_it: ^7.2.0
   equatable: ^2.0.3
