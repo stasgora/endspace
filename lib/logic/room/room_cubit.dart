@@ -1,35 +1,21 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
-import 'package:reloadable_bloc/reloadable_bloc.dart';
 
 import '../../model/room.dart';
-import '../../services/connection_provider.dart';
 import '../cubit_base.dart';
 
 part 'room_state.dart';
 
 class RoomCubit extends CubitBase<RoomState> {
-  final _connection = GetIt.I<ConnectionProvider>();
   final _navigator = GetIt.I<GlobalKey<NavigatorState>>();
 
   RoomCubit({required ModalRoute route, required Room room})
-      : super(
-          route: route,
-          initialState: RoomState(room),
-        );
-
-  @override
-  void show(ReloadableReason reason) {
-    super.show(reason);
-    _connection.subscribe('playersChange', _onPlayersChange);
-    _connection.subscribe('gameStarted', _onGameStarted);
-  }
-
-  @override
-  void hide(ReloadableReason reason) {
-    _connection.unsubscribe('playersChange', _onPlayersChange);
-    _connection.unsubscribe('gameStarted', _onGameStarted);
+      : super(route: route, initialState: RoomState(room)) {
+    addCallbacks({
+      'playersChange': _onPlayersChange,
+      'gameStarted': _onGameStarted,
+    });
   }
 
   void _onGameStarted(dynamic args) {
@@ -44,7 +30,7 @@ class RoomCubit extends CubitBase<RoomState> {
         players: (players as List).cast<String>(),
       )));
 
-  void exitRoom() => _connection.send('leaveRoom');
+  void exitRoom() => connection.send('leaveRoom');
 
-  void startGame() => _connection.send('startGame');
+  void startGame() => connection.send('startGame');
 }
