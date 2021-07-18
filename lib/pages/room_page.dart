@@ -59,6 +59,7 @@ class RoomPage extends StatelessWidget {
                       ActionButton(UIButton(
                         "start",
                         () {},
+                        UIButtonType.forward
                       )),
                       ActionButton(UIButton(
                         "exit",
@@ -66,6 +67,7 @@ class RoomPage extends StatelessWidget {
                           context.read<RoomCubit>().exitRoom();
                           Navigator.of(context).pop();
                         },
+                        UIButtonType.back
                       ))
                     ],
                   ),

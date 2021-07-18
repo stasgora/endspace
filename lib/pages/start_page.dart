@@ -46,7 +46,7 @@ class _StartPageState extends State<StartPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CustomTextField(UITextField(nameController, TextFieldType.name)),
-                      ActionButton(UIButton("Create room", onStartButton)),
+                      ActionButton(UIButton("Create room", onStartButton, UIButtonType.forward)),
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
                         child: Row(children: <Widget>[
@@ -76,7 +76,7 @@ class _StartPageState extends State<StartPage> {
                         ),
                       ),
                       CustomCodeField(roomController),
-                      ActionButton(UIButton("JOIN", onJoinButton))
+                      ActionButton(UIButton("JOIN", onJoinButton, UIButtonType.forward))
                     ],
                   ),
                 ),

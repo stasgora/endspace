@@ -23,6 +23,9 @@ dependencies:
   bordered_text: ^2.0.0
   pin_code_fields: ^7.2.0
 
+  #Engine
+  flame_audio: ^1.0.0-rc.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -33,6 +36,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/avatars/
+    - assets/audio/
   fonts:
     - family: LuckiestGuy
       fonts:

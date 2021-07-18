@@ -1,3 +1,4 @@
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -15,13 +16,16 @@ import 'utils/ui/theme_config.dart';
 void main() {
   GetIt.I.registerSingleton(ConnectionProvider());
   GetIt.I.registerSingleton<RoomService>(SocketRoomService());
-
   runApp(SpaceGame());
 }
 
 class SpaceGame extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+    _loadAudio();
+    WidgetsBinding.instance!.addPostFrameCallback(
+            (_) => _initializeAndPlayAudio());
     return MaterialApp(
       title: 'End Space',
       theme: _createAppTheme(),
@@ -62,5 +66,15 @@ class SpaceGame extends StatelessWidget {
         button: TextStyle(fontSize: 32.0, color: AppColors.lightTextColor, fontFamily: 'LuckiestGuy') // (Almost always white) button text
       ),
     );
+  }
+
+  Future<void> _loadAudio() async {
+    await FlameAudio.audioCache.loadAll(['click.mp3', 'back.mp3']);
+    // await FlameAudio.bgm.audioCache.loadAll([]);
+  }
+
+  void _initializeAndPlayAudio() {
+    FlameAudio.bgm.initialize();
+    FlameAudio.bgm.play("menu.mp3");
   }
 }

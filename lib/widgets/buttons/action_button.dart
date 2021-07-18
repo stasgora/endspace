@@ -1,3 +1,4 @@
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../model/ui/ui_button.dart';
@@ -25,8 +26,14 @@ class ActionButton extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(32, 16, 32, 8)
         ),
         child: Text(button.text, style: Theme.of(context).textTheme.button),
-        onPressed: button.action
+        onPressed: onButtonPressed
       )
     );
+  }
+
+  Future<void> onButtonPressed() async {
+    if(button.type == UIButtonType.forward) FlameAudio.play("click.mp3");
+    else if(button.type == UIButtonType.back) FlameAudio.play("back.mp3");
+    button.action();
   }
 }
