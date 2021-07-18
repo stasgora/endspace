@@ -34,6 +34,7 @@ class ActionButton extends StatelessWidget {
   Future<void> onButtonPressed() async {
     if(button.type == UIButtonType.forward) FlameAudio.play("click.mp3");
     else if(button.type == UIButtonType.back) FlameAudio.play("back.mp3");
+    else if(button.type == UIButtonType.gameStart) FlameAudio.play("start.mp3");
     button.action();
   }
 }

@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import '../../utils/ui/theme_config.dart';
 
-enum UIButtonType {forward, back}
+enum UIButtonType {forward, back, gameStart}
 
 class UIButton {
   final String text;

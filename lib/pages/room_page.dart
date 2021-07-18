@@ -59,7 +59,7 @@ class RoomPage extends StatelessWidget {
                       ActionButton(UIButton(
                         "start",
                         () => context.read<RoomCubit>().startGame(),
-                        UIButtonType.forward
+                        UIButtonType.gameStart
                       )),
                       ActionButton(UIButton(
                         "exit",

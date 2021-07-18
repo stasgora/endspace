@@ -1,3 +1,4 @@
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -54,6 +55,12 @@ class _CustomCodeFieldState extends State<CustomCodeField> {
 
         },
         onChanged: (value) {
+          if (value.length >= currentText.length) {
+            FlameAudio.play("code_enter.mp3");
+          } else {
+            FlameAudio.play("code_del.mp3");
+          }
+
           setState(() {
             currentText = value;
           });
