@@ -338,6 +338,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.0"
+  stateful_bloc:
+    dependency: "direct main"
+    description:
+      path: stateful_bloc
+      ref: HEAD
+      resolved-ref: "55726d34599d34da46d224496f258fedbdd6c838"
+      url: "https://github.com/stasgora/bloc-extensions.git"
+    source: git
+    version: "1.0.0"
   stream_channel:
     dependency: transitive
     description:

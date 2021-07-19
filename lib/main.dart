@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
+import 'logic/dashboard_cubit.dart';
 import 'logic/room_cubit.dart';
 import 'logic/start_page_cubit.dart';
 import 'model/room.dart';
-import 'pages/game_page.dart';
+import 'pages/game_dashboard.dart';
 import 'pages/room_page.dart';
 import 'pages/start_page.dart';
 import 'services/connection_provider.dart';
 import 'utils/ui/theme_config.dart';
 
-void main() {
+void main() async {
   GetIt.I.registerSingleton(ConnectionProvider());
   GetIt.I.registerSingleton(GlobalKey<NavigatorState>());
   GetIt.I.registerSingleton(RouteObserver());
@@ -24,8 +25,8 @@ class SpaceGame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _loadAudio();
-    WidgetsBinding.instance!.addPostFrameCallback(
-            (_) => _initializeAndPlayAudio());
+    WidgetsBinding.instance!
+        .addPostFrameCallback((_) => _initializeAndPlayAudio());
     return MaterialApp(
       title: 'End Space',
       theme: _createAppTheme(),
@@ -49,7 +50,10 @@ class SpaceGame extends StatelessWidget {
             RoomPage(),
             RoomCubit(route: getRoute(ctx)!, room: getParams(ctx) as Room),
           ),
-      '/game-page': (ctx) => GamePage(),
+      '/game-dashboard': (ctx) => withCubit(
+            GameDashboard(),
+            DashboardCubit(getRoute(ctx)!),
+          ),
     };
   }
 
@@ -107,14 +111,13 @@ class SpaceGame extends StatelessWidget {
   }
 
   Future<void> _loadAudio() async {
-    await FlameAudio.audioCache.loadAll(
-        [
-          'click.mp3',
-          'back.mp3',
-          'code_enter.mp3',
-          'code_del.mp3',
-          'start.mp3'
-        ]);
+    await FlameAudio.audioCache.loadAll([
+      'click.mp3',
+      'back.mp3',
+      'code_enter.mp3',
+      'code_del.mp3',
+      'start.mp3',
+    ]);
     await FlameAudio.bgm.audioCache.loadAll(['menu.mp3']);
   }
 
