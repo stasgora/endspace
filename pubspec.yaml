@@ -31,6 +31,10 @@ dependencies:
   #Engine
   flame_audio: ^1.0.0-rc.1
 
+dependency_overrides:
+  socket_io_common:
+    path: ../socket_io_common
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

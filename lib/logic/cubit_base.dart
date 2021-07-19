@@ -7,12 +7,15 @@ import '../services/connection_provider.dart';
 abstract class CubitBase<State> extends ReloadableCubit<State> {
   @protected
   final connection = GetIt.I<ConnectionProvider>();
+  final _navigator = GetIt.I<GlobalKey<NavigatorState>>();
+  @protected
+  NavigatorState? get navigator => _navigator.currentState;
 
   @override
   RouteObserver routeObserver = GetIt.I<RouteObserver>();
 
-  @protected
   final _callbacks = <String, void Function(dynamic)>{};
+  bool _active = false;
 
   CubitBase({
     required State initialState,
@@ -21,18 +24,20 @@ abstract class CubitBase<State> extends ReloadableCubit<State> {
 
   void addCallbacks(Map<String, void Function(dynamic)> callbacks) {
     _callbacks.addAll(callbacks);
-    callbacks.forEach(connection.subscribe);
+    if (_active) callbacks.forEach(connection.subscribe);
   }
 
   @override
   void show(ReloadableReason reason) {
     super.show(reason);
     _callbacks.forEach(connection.subscribe);
+    _active = true;
   }
 
   @override
   void hide(ReloadableReason reason) {
     _callbacks.forEach(connection.unsubscribe);
+    _active = false;
   }
 
   @override

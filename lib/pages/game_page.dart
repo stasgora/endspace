@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class GamePage extends StatelessWidget {
@@ -5,8 +6,8 @@ class GamePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Game'),
+    return Scaffold(
+      body: Text('Game'),
     );
   }
 }

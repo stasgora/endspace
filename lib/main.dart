@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
-import 'logic/room/room_cubit.dart';
-import 'logic/start_page/start_page_cubit.dart';
+import 'logic/room_cubit.dart';
+import 'logic/start_page_cubit.dart';
 import 'model/room.dart';
 import 'pages/game_page.dart';
 import 'pages/room_page.dart';

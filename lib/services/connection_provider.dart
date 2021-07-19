@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:socket_io_client/socket_io_client.dart';
 
 class ConnectionProvider {
@@ -10,8 +12,15 @@ class ConnectionProvider {
 
   void send(String event, [dynamic data]) => socket.emit(event, data);
 
+  Future<dynamic> request(String event, [dynamic data]) {
+    final response = Completer();
+    socket.once('${event}Response', response.complete);
+    socket.emit(event, data);
+    return response.future.timeout(Duration(seconds: 5), onTimeout: () => null);
+  }
+
   void subscribe(String event, void Function(dynamic) callback) {
-    socket.on(event, callback);
+    socket.on(event, callback, duplicates: false);
   }
 
   void unsubscribe(String event, void Function(dynamic) callback) {

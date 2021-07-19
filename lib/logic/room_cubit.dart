@@ -1,15 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get_it/get_it.dart';
 
-import '../../model/room.dart';
-import '../cubit_base.dart';
-
-part 'room_state.dart';
+import '../model/room.dart';
+import 'cubit_base.dart';
 
 class RoomCubit extends CubitBase<RoomState> {
-  final _navigator = GetIt.I<GlobalKey<NavigatorState>>();
-
   RoomCubit({required ModalRoute route, required Room room})
       : super(route: route, initialState: RoomState(room)) {
     addCallbacks({
@@ -19,7 +14,7 @@ class RoomCubit extends CubitBase<RoomState> {
   }
 
   void _onGameStarted(dynamic args) {
-    _navigator.currentState?.pushNamedAndRemoveUntil(
+    navigator?.pushNamedAndRemoveUntil(
       '/game-page',
       (route) => false,
     );
@@ -33,4 +28,13 @@ class RoomCubit extends CubitBase<RoomState> {
   void exitRoom() => connection.send('leaveRoom');
 
   void startGame() => connection.send('startGame');
+}
+
+class RoomState extends Equatable {
+  final Room room;
+
+  RoomState(this.room);
+
+  @override
+  List<Object> get props => [room];
 }
