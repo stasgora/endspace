@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../../services/settings_provider.dart';
 import '../../utils/ui/theme_config.dart';
 
 class CustomCodeField extends StatefulWidget {
@@ -38,7 +39,6 @@ class _CustomCodeFieldState extends State<CustomCodeField> {
           inactiveColor: AppColors.textFieldBasicBackground,
           inactiveFillColor: Colors.white,
         ),
-
         cursorColor: Colors.white,
         animationDuration: Duration(milliseconds: 300),
         enableActiveFill: true,
@@ -51,24 +51,26 @@ class _CustomCodeFieldState extends State<CustomCodeField> {
             blurRadius: 10,
           )
         ],
-        onCompleted: (v) {
-
-        },
+        onCompleted: (v) {},
         onChanged: (value) {
           if (value.length >= currentText.length) {
-            FlameAudio.play("code_enter.mp3");
+            FlameAudio.play(
+              "code_enter.mp3",
+              volume: SettingsProvider.soundEffectVolume,
+            );
           } else {
-            FlameAudio.play("code_del.mp3");
+            FlameAudio.play(
+              "code_del.mp3",
+              volume: SettingsProvider.soundEffectVolume,
+            );
           }
 
-          setState(() {
-            currentText = value;
-          });
+          setState(() => currentText = value);
         },
         beforeTextPaste: (text) {
           return true;
         },
-      )
+      ),
     );
   }
 }

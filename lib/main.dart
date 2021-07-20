@@ -1,4 +1,3 @@
-import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -11,22 +10,24 @@ import 'pages/game_dashboard.dart';
 import 'pages/room_page.dart';
 import 'pages/start_page.dart';
 import 'services/connection_provider.dart';
+import 'utils/audio.dart';
 import 'utils/ui/theme_config.dart';
 
 void main() async {
+  await WidgetsFlutterBinding.ensureInitialized();
+
   GetIt.I.registerSingleton(ConnectionProvider());
   GetIt.I.registerSingleton(GlobalKey<NavigatorState>());
   GetIt.I.registerSingleton(RouteObserver());
 
+  await loadAudio();
+  initializeAndPlayAudio();
   runApp(SpaceGame());
 }
 
 class SpaceGame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    _loadAudio();
-    WidgetsBinding.instance!
-        .addPostFrameCallback((_) => _initializeAndPlayAudio());
     return MaterialApp(
       title: 'End Space',
       theme: _createAppTheme(),
@@ -111,21 +112,5 @@ class SpaceGame extends StatelessWidget {
         ), // (Almost always white) button text
       ),
     );
-  }
-
-  Future<void> _loadAudio() async {
-    await FlameAudio.audioCache.loadAll([
-      'click.mp3',
-      'back.mp3',
-      'code_enter.mp3',
-      'code_del.mp3',
-      'start.mp3',
-    ]);
-    await FlameAudio.bgm.audioCache.loadAll(['menu.mp3']);
-  }
-
-  void _initializeAndPlayAudio() {
-    FlameAudio.bgm.initialize();
-    if (!FlameAudio.bgm.isPlaying) FlameAudio.bgm.play("menu.mp3");
   }
 }

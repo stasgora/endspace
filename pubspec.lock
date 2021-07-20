@@ -121,7 +121,7 @@ packages:
     source: hosted
     version: "6.1.2"
   flame:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flame
       url: "https://pub.dartlang.org"
