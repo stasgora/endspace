@@ -1,31 +1,33 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/widgets.dart' hide Action;
-import 'package:reloadable_bloc/reloadable_bloc.dart';
-import 'package:stateful_bloc/stateful_bloc.dart';
+import 'package:flutter/widgets.dart';
+import '../model/task.dart';
 
-import 'base/stateful_base.dart';
+import 'base/cubit_base.dart';
 
-class DashboardCubit extends StatefulBase<DashboardData> {
-  DashboardCubit(ModalRoute route) : super(route);
+class DashboardCubit extends CubitBase<DashboardState> {
+  DashboardCubit({required ModalRoute route, required DashboardState state})
+      : super(route: route, initialState: state) {
+    addCallbacks({'dashboardState': _onDashboardState});
+  }
 
-  @override
-  Future reload(ReloadableReason reason) => load(body: () async {
-    var data = await connection.request('planetData');
-    return Action.finish(DashboardData.fromJson(data));
-  });
+  void _onDashboardState(dynamic data) => emit(DashboardState.fromJson(data));
 }
 
-class DashboardData extends Equatable {
+class DashboardState extends Equatable {
   final double energy;
   final String planet;
   final int endTime;
+  final List<Task> tasks;
 
-  DashboardData(this.energy, this.planet, this.endTime);
+  DashboardState(this.energy, this.planet, this.endTime, this.tasks);
 
-  DashboardData.fromJson(Map<String, dynamic> json)
+  DashboardState.fromJson(Map<String, dynamic> json)
       : energy = json['energy'],
         planet = json['planet'],
-        endTime = json['endTime'];
+        endTime = json['endTime'],
+        tasks = json['tasks'] != null
+            ? (json['tasks'] as List).map((e) => Task.fromJson(e)).toList()
+            : [];
 
   @override
   List<Object> get props => [];

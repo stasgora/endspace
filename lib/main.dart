@@ -52,7 +52,10 @@ class SpaceGame extends StatelessWidget {
           ),
       '/game-dashboard': (ctx) => withCubit(
             GameDashboard(),
-            DashboardCubit(getRoute(ctx)!),
+            DashboardCubit(
+              route: getRoute(ctx)!,
+              state: getParams(ctx) as DashboardState,
+            ),
           ),
     };
   }

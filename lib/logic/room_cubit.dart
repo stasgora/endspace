@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import '../model/room.dart';
 import 'base/cubit_base.dart';
+import 'dashboard_cubit.dart';
 
 class RoomCubit extends CubitBase<RoomState> {
   RoomCubit({required ModalRoute route, required Room room})
@@ -17,6 +18,7 @@ class RoomCubit extends CubitBase<RoomState> {
     navigator?.pushNamedAndRemoveUntil(
       '/game-dashboard',
       (route) => false,
+      arguments: DashboardState.fromJson(args),
     );
   }
 
