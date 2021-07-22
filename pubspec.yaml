@@ -1,5 +1,5 @@
 name: game
-description: Space game
+description: End Space game
 
 publish_to: 'none'
 
@@ -39,7 +39,7 @@ dependencies:
 
 dependency_overrides:
   socket_io_common:
-    path: ../socket_io_common
+    git: https://github.com/stasgora/socket_io_common.git
 
 dev_dependencies:
   flutter_test:
