@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
-import 'logic/dashboard_cubit.dart';
+import 'logic/dashboard/dashboard_cubit.dart';
 import 'logic/room_cubit.dart';
 import 'logic/start_page_cubit.dart';
+import 'logic/task_cubit.dart';
 import 'model/room.dart';
 import 'pages/game_dashboard.dart';
 import 'pages/room_page.dart';
@@ -52,7 +53,7 @@ class SpaceGame extends StatelessWidget {
             RoomCubit(route: getRoute(ctx)!, room: getParams(ctx) as Room),
           ),
       '/game-dashboard': (ctx) => withCubit(
-            GameDashboard(),
+            withCubit(GameDashboard(), TaskCubit(getRoute(ctx)!)),
             DashboardCubit(
               route: getRoute(ctx)!,
               state: getParams(ctx) as DashboardState,

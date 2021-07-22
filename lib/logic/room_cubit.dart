@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import '../model/room.dart';
 import 'base/cubit_base.dart';
-import 'dashboard_cubit.dart';
+import 'dashboard/dashboard_cubit.dart';
 
 class RoomCubit extends CubitBase<RoomState> {
   RoomCubit({required ModalRoute route, required Room room})
