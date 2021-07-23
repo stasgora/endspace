@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 
-import '../model/task.dart';
-import 'base/cubit_base.dart';
+import '../model/data/task.dart';
+import 'cubit_base.dart';
 
 class TaskCubit extends CubitBase<TaskCubitState> {
   TaskCubit(ModalRoute route)
@@ -15,14 +15,17 @@ class TaskCubit extends CubitBase<TaskCubitState> {
   void _onTaskChange(dynamic args) {
     var task = Task.fromJson(args);
     if (state.task == null || state.task!.id != task.id) return;
+    //if (task.players)
     emit(TaskCubitState(task));
   }
 
   void action() {
     if (state.task!.state == TaskState.inProgress)
-      connection.send('taskAction', state.task?.id);
+      connection.send('taskAction');
     else emit(TaskCubitState());
   }
+
+  void leaveTask() => connection.send('leaveTask');
 
   void joinTask(int id) async {
     if (state.task != null) return;

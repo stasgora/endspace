@@ -37,10 +37,6 @@ dependencies:
   flame_audio: ^1.0.0-rc.1
   flame: ^1.0.0-releasecandidate.13
 
-dependency_overrides:
-  socket_io_common:
-    git: https://github.com/stasgora/socket_io_common.git
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

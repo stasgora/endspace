@@ -325,13 +325,11 @@ packages:
     source: hosted
     version: "1.0.1"
   socket_io_common:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "07f3781c7d0c0803b732e125484be43103e4c286"
-      url: "https://github.com/stasgora/socket_io_common.git"
-    source: git
+      name: socket_io_common
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "1.0.0"
   source_span:
     dependency: transitive

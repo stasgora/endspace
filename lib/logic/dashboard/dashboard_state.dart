@@ -27,14 +27,25 @@ class DashboardState extends Equatable {
     );
   }
 
+  DashboardState copyFrom(Map<String, dynamic> json) {
+    return copyWith(
+      energy: json['energy'],
+      planet: json['planet'],
+      endTime: json['endTime'],
+      tasks: _mapTasks(json),
+    );
+  }
+
   DashboardState.fromJson(Map<String, dynamic> json)
       : energy = json['energy'],
         planet = json['planet'],
         endTime = json['endTime'],
-        tasks = json['tasks'] != null
-            ? Map.fromEntries((json['tasks'] as List)
-            .map((e) => MapEntry(e['id'], Task.fromJson(e))))
-            : {};
+        tasks = _mapTasks(json) ?? {};
+
+  static Map<int, Task>? _mapTasks(dynamic json) => json['tasks'] != null
+      ? Map.fromEntries((json['tasks'] as List)
+          .map((e) => MapEntry(e['id'], Task.fromJson(e))))
+      : null;
 
   @override
   List<Object> get props => [energy, planet, endTime, tasks];

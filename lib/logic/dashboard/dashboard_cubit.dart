@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
-import '../../model/task.dart';
+import '../../model/data/task.dart';
 
-import '../base/cubit_base.dart';
+import '../cubit_base.dart';
 
 part 'dashboard_state.dart';
 
@@ -10,7 +10,7 @@ class DashboardCubit extends CubitBase<DashboardState> {
   DashboardCubit({required ModalRoute route, required DashboardState state})
       : super(route: route, initialState: state) {
     addCallbacks({
-      'dashboardState': _onDashboardState,
+      'dashboardChange': _onDashboardChange,
       'taskChange': _onTaskChange,
     });
   }
@@ -21,5 +21,10 @@ class DashboardCubit extends CubitBase<DashboardState> {
     emit(state.copyWith(tasks: tasks));
   }
 
-  void _onDashboardState(dynamic data) => emit(DashboardState.fromJson(data));
+  void exit() {
+    connection.send('leaveRoom');
+    navigator?.pushNamedAndRemoveUntil('/start-page', (route) => false);
+  }
+
+  void _onDashboardChange(dynamic data) => emit(state.copyFrom(data));
 }

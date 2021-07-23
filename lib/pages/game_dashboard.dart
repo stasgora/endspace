@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game/logic/task_cubit.dart';
-import 'package:game/model/task.dart';
+import 'package:game/model/data/task.dart';
 
 import '../logic/dashboard/dashboard_cubit.dart';
 import '../logic/timer/timer_cubit.dart';
@@ -40,7 +40,7 @@ class GameDashboard extends StatelessWidget {
                         EnumToString.convertToString(task.state),
                         style: style,
                       ),
-                      trailing: Text('${task.participants}', style: style),
+                      trailing: Text('${task.players}/${task.playersNeeded}', style: style),
                       onTap: () => context.read<TaskCubit>().joinTask(task.id),
                     ),
                 ],
@@ -61,12 +61,21 @@ class GameDashboard extends StatelessWidget {
                 children: [
                   Text(title, style: style),
                   ElevatedButton(
-                    child: Text(status == TaskState.inProgress ? 'Finish' : 'Back'),
-                    onPressed: () => context.read<TaskCubit>().action(),
+                    child: Text('Leave'),
+                    onPressed: () => context.read<TaskCubit>().leaveTask(),
                   ),
+                  if (status == TaskState.inProgress)
+                    ElevatedButton(
+                      child: Text('Finish'),
+                      onPressed: () => context.read<TaskCubit>().action(),
+                    ),
                 ],
               );
             },
+          ),
+          ElevatedButton(
+            child: Text('Exit'),
+            onPressed: () => context.read<DashboardCubit>().exit(),
           ),
         ],
       ),

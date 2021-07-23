@@ -6,7 +6,7 @@ import 'logic/dashboard/dashboard_cubit.dart';
 import 'logic/room_cubit.dart';
 import 'logic/start_page_cubit.dart';
 import 'logic/task_cubit.dart';
-import 'model/room.dart';
+import 'model/data/room.dart';
 import 'pages/game_dashboard.dart';
 import 'pages/room_page.dart';
 import 'pages/start_page.dart';

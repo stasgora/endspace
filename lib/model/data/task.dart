@@ -9,7 +9,8 @@ class Task extends Equatable {
   final int id;
   final TaskType type;
   final String name;
-  final int participants;
+  final int playersNeeded;
+  final int players;
   final TaskState state;
 
   Task.fromJson(Map<String, dynamic> json)
@@ -17,8 +18,9 @@ class Task extends Equatable {
         type = EnumToString.fromString(TaskType.values, json['type'])!,
         state = EnumToString.fromString(TaskState.values, json['state'])!,
         name = json['name'],
-        participants = json['participants'];
+        players = json['players'],
+        playersNeeded = json['playersNeeded'];
 
   @override
-  List<Object?> get props => [id, type, state, name, participants];
+  List<Object?> get props => [id, type, state, name, playersNeeded, players];
 }

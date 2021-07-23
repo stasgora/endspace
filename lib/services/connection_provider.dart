@@ -20,7 +20,7 @@ class ConnectionProvider {
   }
 
   void subscribe(String event, void Function(dynamic) callback) {
-    socket.on(event, callback, duplicates: false);
+    socket.on(event, callback);
   }
 
   void unsubscribe(String event, void Function(dynamic) callback) {

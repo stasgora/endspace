@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 
-import '../model/room.dart';
-import 'base/cubit_base.dart';
+import '../model/data/room.dart';
+import 'cubit_base.dart';
 import 'dashboard/dashboard_cubit.dart';
 
 class RoomCubit extends CubitBase<RoomState> {
